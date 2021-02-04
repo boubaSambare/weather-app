@@ -1,27 +1,46 @@
 import React from "react";
-import { Media } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import styled from "@emotion/styled";
+
+const MfontSize = styled.span(({ size = 15 }) => ({
+  fontSize: `${size}px`,
+}));
 
 const MeteoCard = (props) => {
   const meteoData = useSelector((state) => state.meteoData.value);
+  const meteoDataErr = useSelector((state) => state.meteoData.errorMessage);
 
   return (
     <>
       {meteoData && (
-        <Media>
-          <img
-            width={100}
-            height={100}
-            className="mr-3"
-            src={`../../icons/${meteoData.weather[0].icon}.svg`}
-            alt="Generic placeholder"
-          />
-          <Media.Body>
-            <h5>{meteoData.name}</h5>
-            <p>{console.log(meteoData.weather[0].main)}</p>
-            <p>{meteoData.weather[0].description}</p>
-          </Media.Body>
-        </Media>
+        <Card style={{ width: 300 }}>
+          <Card.Header className="text-center">
+            <Card.Title>{meteoData.name}</Card.Title>
+            <Card.Text>{meteoData.weather[0].main}</Card.Text>
+          </Card.Header>
+          <Card.Body>
+            <Row>
+              <Col>
+                <img
+                  width={100}
+                  height={100}
+                  className="mr-3"
+                  src={`../../icons/${meteoData.weather[0].icon}.svg`}
+                  alt="Generic placeholder"
+                />
+              </Col>
+              <Col>
+                <p>
+                  <MfontSize size={40}>
+                    {Math.floor(meteoData.main.temp - 273.15)}
+                  </MfontSize>
+                  <MfontSize>&#8451;</MfontSize>
+                </p>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
       )}
     </>
   );

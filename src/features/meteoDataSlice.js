@@ -3,11 +3,15 @@ import {createSlice} from '@reduxjs/toolkit'
 export const MeteoDataSlice = createSlice({
     name:"meteoData",
     initialState:{
-        value:null
+        value:null,
+        errorMessage:''
     },
     reducers: {
-        setMeteoData: (state,action) => {
-            state.value = action.payload
+        setMeteoData: (state, action) => {
+            state.value = action.payload;
+        },
+        setErroorMessage: (state, action) => {
+            state.errorMessage = action.payload;
         }
     }
 })
@@ -16,7 +20,7 @@ export const MeteoDataSlice = createSlice({
 
  export const fetchMeteodata = queryString => async (dispatch )=> {
      try {
-         const baseUrl = `http://api.openweathermap.org/data/2.5/weather?q=${queryString}&appid=b8b25ea1bd5fcbc2153b04c1e26ba189`
+         const baseUrl = `http://api.openweathermap.org/data/2.5/weather?q=${queryString}&appid=${process.env.REACT_APP_METEO_KEY}`
          const request = await fetch(baseUrl)
          if (request.ok) {
              dispatch(setMeteoData(await request.json()))
