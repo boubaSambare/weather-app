@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import styled from "@emotion/styled";
+import { fechtDaylyWeather } from "../../api/weather";
 
 const MfontSize = styled.span(({ size = 15 }) => ({
   fontSize: `${size}px`,
@@ -9,10 +10,26 @@ const MfontSize = styled.span(({ size = 15 }) => ({
 
 const MeteoCard = (props) => {
   const meteoData = useSelector((state) => state.meteoData.value);
-  const meteoDataErr = useSelector((state) => state.meteoData.errorMessage);
+  const isLoading = useSelector((state) => state.meteoData.isLoading);
+  const [meteoDailyData, setMeteoDailyData] = useState(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fechtDaylyWeather(
+        meteoData.coord.lon,
+        meteoData.coord.lat
+      );
+      setMeteoDailyData(data);
+    };
+    if (meteoData?.cod === 200) {
+      fetchData();
+    }
+  }, [meteoData]);
+
+  console.log(meteoDailyData);
   return (
     <>
+      {isLoading && <h2>loading</h2>}
       {meteoData && (
         <Card style={{ width: 300 }}>
           <Card.Header className="text-center">
