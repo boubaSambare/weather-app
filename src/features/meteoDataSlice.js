@@ -23,7 +23,7 @@ export const MeteoDataSlice = createSlice({
 
  export const fetchMeteodata = queryString => async (dispatch )=> {
      try {
-         const baseUrl = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${queryString}&appid=${process.env.REACT_APP_METEO_API_KEY}`
+         const baseUrl = `http://api.openweathermap.org/data/2.5/weather?q=${queryString}&appid=${process.env.REACT_APP_METEO_API_KEY}`
          dispatch(setIsLoading());
          const request = await fetch(baseUrl)
          if (request.ok) {
