@@ -64,8 +64,8 @@ const MeteoCard = (props) => {
             </Row>
             <Row style={{ display: "flex", flexWrap: "nowrap" }}>
               {meteoDailyData &&
-                meteoDailyData?.daily.map((data) => (
-                  <Col>
+                meteoDailyData?.daily.map((data, k) => (
+                  <Col key={k}>
                     <VerticalAlign>
                       <span>
                         {" "}

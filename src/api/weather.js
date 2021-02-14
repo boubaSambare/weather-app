@@ -6,7 +6,7 @@ export const fechtCurentWeather = async (location) => {
 } 
 
 export const fechtDaylyWeather = async (long,lat) => {
-    const ENDPOINT_URL =`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&appid=${process.env.REACT_APP_METEO_API_KEY}`;
+    const ENDPOINT_URL =`${process.env.REACT_APP_BASE_URL}/weather/onecall?lon=${long}&lat=${lat}`;
 
     const request = await fetch(ENDPOINT_URL);
     return await request.json();
