@@ -14,7 +14,10 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 const Background = styled.div(({ photo }) => ({
-  background: `url(${photo})`,
+  backgroundImage: `url(${photo})`,
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  backgroundSize: "cover",
 }));
 
 const App = (props) => {
