@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import styled from "@emotion/styled";
+import { css, jsx } from "@emotion/react";
 import { fechtDaylyWeather } from "../../api/weather";
 import VerticalAlign from "../../styles/components/VerticalAlign";
 
@@ -63,7 +64,16 @@ const MeteoCard = (props) => {
                 </Row>
               </Col>
             </Row>
-            <Row style={{ display: "flex", flexWrap: "nowrap" }}>
+            <Row
+              css={css`
+                font-size: 30px;
+                display: flex;
+                flex-wrap: nowrap;
+                @media (min-width: 420px) {
+                  flex-wrap: wrap;
+                }
+              `}
+            >
               {meteoDailyData &&
                 meteoDailyData?.daily.map((data, k) => (
                   <Col key={k}>
