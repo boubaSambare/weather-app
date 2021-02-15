@@ -33,7 +33,7 @@ const MeteoCard = (props) => {
     <>
       {isLoading && <h2>loading</h2>}
       {!!meteoData && (
-        <Card style={{ width: "60%", height: "auto" }}>
+        <Card style={{ width: "auto", height: "auto" }}>
           <Card.Header className="text-center">
             <Card.Title>{meteoData?.name}</Card.Title>
             <Card.Text>{meteoData?.weather[0]?.main}</Card.Text>
