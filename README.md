@@ -1,5 +1,7 @@
 # Weather app
 
+##### Live demo [weather app](https://ecstatic-mccarthy-02a43a.netlify.app/)
+
 ### free api key from [openweather](https://openweathermap.org/api)
 
 .env
