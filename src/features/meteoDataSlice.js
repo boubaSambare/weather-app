@@ -4,7 +4,8 @@ export const MeteoDataSlice = createSlice({
     name:"meteoData",
     initialState:{
         value:null,
-        isLoading:false
+        isLoading:false,
+        cityPhotos:null
     },
     reducers: {
         setMeteoData: (state, action) => {
@@ -15,11 +16,14 @@ export const MeteoDataSlice = createSlice({
         },
         unsetIsloading: (state) => {
             state.isLoading = false
-        }
+        },
+        setCityPhotos: (state, action) => {
+            state.cityPhotos = action.payload;
+        },
     }
 })
 
- const {setMeteoData,setIsLoading,unsetIsloading} = MeteoDataSlice.actions
+ const {setMeteoData,setIsLoading,unsetIsloading, setCityPhotos} = MeteoDataSlice.actions
 
  export const fetchMeteodata = queryString => async (dispatch )=> {
      try {
@@ -37,4 +41,20 @@ export const MeteoDataSlice = createSlice({
      }
  }
 
+
+ export const fetchCityPhotos = queryString => async (dispatch )=> {
+    try {
+        const baseUrl = `${process.env.REACT_APP_BASE_URL}/unsplast?name=${queryString}`
+        dispatch(setIsLoading());
+        const request = await fetch(baseUrl)
+        if (request.ok) {
+            dispatch(setCityPhotos(await request.json()));
+            dispatch(unsetIsloading());
+        }
+       // console.log(await request.json())
+
+    } catch (error) {
+        console.log(error)
+    }
+}
 export default MeteoDataSlice.reducer

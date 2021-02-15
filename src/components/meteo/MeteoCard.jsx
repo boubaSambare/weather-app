@@ -22,6 +22,7 @@ const MeteoCard = (props) => {
       );
       setMeteoDailyData(data);
     };
+
     if (meteoData?.cod === 200) {
       fetchData();
     }
@@ -31,11 +32,11 @@ const MeteoCard = (props) => {
   return (
     <>
       {isLoading && <h2>loading</h2>}
-      {meteoData && (
+      {!!meteoData && (
         <Card style={{ width: "60%", height: "auto" }}>
           <Card.Header className="text-center">
-            <Card.Title>{meteoData.name}</Card.Title>
-            <Card.Text>{meteoData.weather[0].main}</Card.Text>
+            <Card.Title>{meteoData?.name}</Card.Title>
+            <Card.Text>{meteoData?.weather[0]?.main}</Card.Text>
           </Card.Header>
           <Card.Body>
             <Row>
@@ -46,7 +47,7 @@ const MeteoCard = (props) => {
                       width={100}
                       height={100}
                       className="mr-3"
-                      src={`../../icons/${meteoData.weather[0].icon}.svg`}
+                      src={`../../icons/${meteoData?.weather[0].icon}.svg`}
                       alt="Generic placeholder"
                       loading="lazy"
                     />

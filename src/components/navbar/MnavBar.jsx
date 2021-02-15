@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Navbar, Form, Button, FormControl } from "react-bootstrap";
-import { fetchMeteodata } from "../../features/meteoDataSlice";
+import { fetchMeteodata, fetchCityPhotos } from "../../features/meteoDataSlice";
 import { useDispatch } from "react-redux";
 import styled from "@emotion/styled";
 
@@ -31,6 +31,7 @@ const MnavBar = (props) => {
               variant="outline-success"
               onClick={() => {
                 dispatch(fetchMeteodata(queryString));
+                dispatch(fetchCityPhotos(queryString));
                 setQueryString("");
               }}
             >

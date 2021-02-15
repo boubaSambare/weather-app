@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import defautImage from "../image/meteo.jpg";
 import MnavBar from "./navbar/MnavBar";
 import MeteoCard from "./meteo/MeteoCard";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   align-items: center;
@@ -13,13 +13,17 @@ const Wrapper = styled.div`
   height: 100vh;
   width: 100%;
 `;
-const Background = styled.div`
-  background: url(${defautImage});
-`;
+const Background = styled.div(({ photo }) => ({
+  background: `url(${photo})`,
+}));
 
 const App = (props) => {
+  const photos = useSelector((state) => state.meteoData.cityPhotos);
+  console.log(photos);
   return (
-    <Background>
+    <Background
+      photo={(photos && photos?.results[0]?.urls?.regular) || defautImage}
+    >
       <MnavBar />
       <Wrapper>
         <MeteoCard />
@@ -27,7 +31,5 @@ const App = (props) => {
     </Background>
   );
 };
-
-App.propTypes = {};
 
 export default App;
